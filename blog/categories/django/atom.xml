@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: django | wgx731's Technical Blog]]></title>
+  <link href="http://wgx731.github.io/blog/categories/django/atom.xml" rel="self"/>
+  <link href="http://wgx731.github.io/"/>
+  <updated>2014-06-24T21:54:07+08:00</updated>
+  <id>http://wgx731.github.io/</id>
+  <author>
+    <name><![CDATA[wgx731]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Django local_settings.py]]></title>
+    <link href="http://wgx731.github.io/blog/2013/08/09/django-local-settings-dot-py/"/>
+    <updated>2013-08-09T16:43:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/08/09/django-local-settings-dot-py</id>
+    <content type="html"><![CDATA[<p>During my internship at <a href="http://www.tripvillas.com">Tripvillas</a> plus the experience on <a href="http://hackdo.herokuapp.com">HackDo</a> project, I have noticed that it&rsquo;s important to have a good <code>local_settings.py</code> file to differentiate the production and development environment as well as hiding the confidential information for Django application.</p>
+
+<!--more-->
+
+
+<p>My approach is to have a <code>_local_settings.py</code> in your code base and write instructions on how you should modify the <code>_local_settings.py</code> to become your development <code>local_settings.py</code>, here is one example I used for <a href="http://hackdo.herokuapp.com">HackDo</a>:</p>
+
+<p><div><script src='https://gist.github.com/6192166.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>There are other approaches like make <code>settings</code> a module and create <code>production.py</code>, <code>development.py</code> and so on, and then put all the confidential information in environment variables.</p>
+
+<p>At last, I just want to comment that <strong>don&rsquo;t ever put confidential information in the code base</strong>.</p>
+]]></content>
+  </entry>
+  
+</feed>

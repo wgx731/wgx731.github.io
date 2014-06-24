@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CS3216 | wgx731's Technical Blog]]></title>
+  <link href="http://wgx731.github.io/blog/categories/cs3216/atom.xml" rel="self"/>
+  <link href="http://wgx731.github.io/"/>
+  <updated>2014-06-24T21:54:07+08:00</updated>
+  <id>http://wgx731.github.io/</id>
+  <author>
+    <name><![CDATA[wgx731]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Team Dynamics Reflection]]></title>
+    <link href="http://wgx731.github.io/blog/2013/10/01/team-dynamics-reflection/"/>
+    <updated>2013-10-01T19:13:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/10/01/team-dynamics-reflection</id>
+    <content type="html"><![CDATA[<p>This is the post for CS3216 Team Dynamic lecture reflection questions.</p>
+
+<!-- More -->
+
+
+<ul>
+<li>How much control and authority would you have given to this fourth voice in our choice of platforms (HTML5/native iOS)?</li>
+</ul>
+
+
+<p>I think based on the given situation, the best choice is to let the only coder inside the team decide, because in terms of how long it take to finish the product and how long it takes for the coder to pick up the required skills for HTML5 or iOS is only known ot the coder himself, therefore let him decide will be more reliable to know the actual time needed to finish the product. I think run experiment with 2 platforms is really a bad choice, it&rsquo;s a waste of resource as well as time, I think it&rsquo;s better to just spend at most 1 day to study the pros and cons of each platform,  link them with product needs, then the team must make the decision. At last, for the fourth voice, as he is not part of the team, it&rsquo;s better to take the voice as suggestion rather than &lsquo;decision&rsquo;.</p>
+
+<ul>
+<li>With the deadline just 2 weeks away, how would you, as project manager, resolved this problem if it were to occur within the team?</li>
+</ul>
+
+
+<p>As I have answered during lecture, first thing needs to be done is to identify the key features of the product, and drop all other features, so that the project is still a manageable functional prototype within the short time period. Then, finalize the schedule and scope of the project as there is no time to try and error during the development any more. At last, just make sure everyone put more effort into the project. But as a project manager, the best way is never push a 7 weeks' project into 2 weeks time period. :P</p>
+
+<ul>
+<li>What are some of the issues that we presented that could have happened to any team? List down 3, and talk about how you would have resolved these issues.</li>
+</ul>
+
+
+<p>1.Team communication issue, anything require teamwork may face this problem. And this is the biggest issue to team performance, any misunderstanding and miscommunication will result in conflicts and low efficiency. To overcome this, the team need to list role and task for each member in details so that everyone knows what they should finish and what others are doing.</p>
+
+<p>2.Deadline issue, as CS3216 is not the only module for us, we can&rsquo;t spend our time all for CS3216 final project. But the deadline can&rsquo;t change, therefore we must plan well, for example, allocate some flexible time for expected events, like one member can&rsquo;t work because of computer is broken. Make sure no one is waiting and doing nothing because of dependency. The best solution is just make sure everyone finish their work on time.</p>
+
+<p>3.Marketing issue, actually I think this is an issue just for this semester, because this year CS3216 have a lot of coders but not much business people. For example, our team is full of coders with no business experience. We may want to do a lot of features that in the end is just so &lsquo;fancy&rsquo; but no use if we don&rsquo;t do well in getting user feedback (which should be the business guy&rsquo;s job). For our team, as we built product for BigSpoon, I believe for the marketing part, we can rely on them (they already start to schedule meetings with our app users). With enough feedback and some guide from business guys in BigSpoon, I believe we can deliver a good product at the end.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Flipboard - Digital DIY Magazines]]></title>
+    <link href="http://wgx731.github.io/blog/2013/09/02/flipboard-digital-diy-magazines/"/>
+    <updated>2013-09-02T23:56:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/09/02/flipboard-digital-diy-magazines</id>
+    <content type="html"><![CDATA[<p>This is the post for CS3216 Assignment 2 Application Critique on Flipboard.</p>
+
+<!-- More -->
+
+
+<p>Flipboard is one of the &lsquo;heavy content&rsquo; presentations among all teams, it&rsquo;s so full that not all points are mentioned during the presentation because of the strict 20 seconds per slide rule. Thanks to <a href="https://www.facebook.com/Fuzzie360">Fazli</a> for sharing the slides to me and there are 4 main area I would like to highlight for this presentation:</p>
+
+<ul>
+<li>Remarkable UX</li>
+</ul>
+
+
+<p><img src="/images/posts/flipboard-1.png" />
+<blockquote><p>Our mission is to let people discover and share content in beautiful, simple, and meaningful ways.</p><footer><strong>Flipboard <a href="https://flipboard.com/about/">https://flipboard.com/about/</a> About</strong></footer></blockquote>
+By focusing on creating &ldquo;virtual&rdquo; magazine, Flipboard is clearly one of the best in this area, like mentioned in the presentation, it&rsquo;s hard to differentiate virtual and real magazine in Flipboard. Besides that, the high quality advertisement in Flipboard makes it even better than real magazine. The flipping animation effect makes user feel like reading real magazines as well. I think Flipboard is really doing what their mission is about.</p>
+
+<ul>
+<li>Reading ecosystem</li>
+</ul>
+
+
+<p><img src="/images/posts/flipboard-2.png" /></p>
+
+<p>I didn&rsquo;t know there is a &lsquo;Flip It&rsquo; plug-in from Flipboard previously, but this is awesome. And this is why Flipboard is called Digital DIY Magazine. As user is able to create, edit his own magazine and share it with the world, the content is not just selected by Flipboard team itself. This is a good sign, as every successful business has a ecosystem :P (Google Android ecosystem, Facebook ecosystem and so on).</p>
+
+<ul>
+<li>RSS Support</li>
+</ul>
+
+
+<p><img src="/images/posts/flipboard-3.png" /></p>
+
+<p>I agree that RSS support is a good suggestion to Flipboard. I believe that Google shutdown Google Reader is just to let other &lsquo;creative&rsquo; RSS reader to come out. :D And I think the presentation didn&rsquo;t mention about Flipboard&rsquo;s competitors like <a href="http://corp.zinio.com/">zinio</a>, <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.magazines&amp;hl=en">Google magazine</a> and so on. If Flipboard can add RSS support, it may be an advantage for its business. And I will suggest Flipboard to add this support within &lsquo;Flip It&rsquo;, as user can create a RSS as his magazine instead of coming out with some new feature to do it.</p>
+
+<ul>
+<li>Social Integration</li>
+</ul>
+
+
+<p><img src="/images/posts/flipboard-4.png" /></p>
+
+<p>Flipboard has social integration with major social platforms like Facebook and Twitter, it may be useful for other users but not for me, I think it&rsquo;s because I still view Flipboard as a reading tool instead of a platform now. Like our team mentioned for <a href="https://www.airtime.com/">AirTime</a>, it&rsquo;s really important for an application to find focus, in my opinion, become the best virtual magazine reading tool should be the focus for Flipboard.</p>
+
+<p><strong>At last, I would like to refer to this &lsquo;TED&rsquo; video about interactive book:</strong></p>
+
+<iframe src="http://embed.ted.com/talks/mike_matas.html" width="640" height="360" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p>What if Flipboard is going to build the next generation interactive magazine? For example, video advertisement in virtual magazine and &lsquo;Harry Potter movie magazine&rsquo; effect like magazine. The future of Flipboard is very bright.</p>
+
+<p><em>That&rsquo;s all I have and wish it leads you to think about it as well.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lesson of Growth Hacking]]></title>
+    <link href="http://wgx731.github.io/blog/2013/09/01/lesson-of-growth-hacking/"/>
+    <updated>2013-09-01T23:52:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/09/01/lesson-of-growth-hacking</id>
+    <content type="html"><![CDATA[<p>I almost forget to blog about the lesson learned from BjornLee&rsquo;s Talk on Monday, here are some key points which I feel like to point out:</p>
+
+<ol>
+<li>Good marketing strategy &#8800; Cost a lot of money</li>
+<li>5 Steps of Customer Life Cycle &ndash; Acquisition, Activation, Retention, Referral, Revenue. I think the presentation gives an awesome guide on Acquisition and Activation part.</li>
+<li>Try fast, this is really something I need to practice, a lot of ideas just burst because I didn&rsquo;t try fast.</li>
+<li>Surround your pullquote like this {" text to be quoted "}</li>
+<li>A whole room of technical people listening to a &lsquo;biz&rsquo; guy talking about marketing is really fun.</li>
+</ol>
+
+
+<p>In summary, even through I am not going to be the one talking to customer in the future, it&rsquo;s still useful to know these tips. In the end, I will be the one building the product, if I don&rsquo;t know how to get feedback from my user, I can&rsquo;t imagine what will happen then. :P</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The "evil" side of Facebook]]></title>
+    <link href="http://wgx731.github.io/blog/2013/09/01/the-evil-side-of-facebook/"/>
+    <updated>2013-09-01T20:02:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/09/01/the-evil-side-of-facebook</id>
+    <content type="html"><![CDATA[<p>Assignment 1 of CS3216 is almost finished, we just submitted our Application Action for Facebook to review, and left with Collection only (which requires Action to be reviewed).</p>
+
+<!--more-->
+
+
+<p>During the last week, we have seen the &lsquo;evil&rsquo; side of Facebook :P, I will just put my findings below in case someone got into same &lsquo;trap&rsquo;:</p>
+
+<ul>
+<li><p>The Request
+<blockquote><p>Requests are only available for games on Facebook.com or iOS and Android apps</p><footer><strong>Facebook Developer <a href="https://developers.Facebook.com/docs/reference/dialogs/requests/">https://developers.Facebook.com/docs/reference/dialogs/requests/</a> Facebook Request Documentation</strong></footer></blockquote>
+<blockquote><p>The primary purpose of your Canvas or Page Tab app on Facebook must not be to simply redirect users out of the Facebook experience and onto an external site.</p><footer><strong>Facebook Developer <a href="https://developers.Facebook.com/policy/">https://developers.Facebook.com/policy/</a> Facebook Policy</strong></footer></blockquote>
+These two lines has made it impossible to use request dialog to invite friends to a standalone Facebook application, initially we are trying to set up a redirect on Canvas page until we notice the Facebook Policy :( Luckily the assignment requirement has changed accordingly.</p></li>
+<li><p>The Like Button
+<blockquote><p>Facebook did ninja changes. The add comment pop-up is only suppose to appear for normal layout. Invite Friends should not use window pop-up.</p><footer><strong>Master Nicholas Kwan <a href="http://caballa.onfry.com/blog/">http://caballa.onfry.com/blog/</a></strong></footer></blockquote>
+Because of the changes, we need to do a lot of new fix on our website. :(</p></li>
+<li><p>The Scrape</p></li>
+</ul>
+
+
+<p>Just some points you need to be careful with:</p>
+
+<ol>
+<li>Facebook scrape will ignore changes in meta data from javascript, make sure you have different meta data for different URL without javascript.</li>
+<li>Facebook like button <code>data-href</code> link should be the scraped link for your object.</li>
+<li>Facebook only scrape every 24 hours, if you need to update, admin of the Facebook application need to force Facebook to update in <a href="https://developers.Facebook.com/tools/debug">Open Graph Debug Tool</a>.</li>
+<li>All the object created by Facebook scrape can&rsquo;t be deleted, as so far we haven&rsquo;t found a way to delete the &lsquo;testing&rsquo; objects.</li>
+<li>Facebook ignore URL with hash inside, there one may not be true, but due to our test it seems so.</li>
+</ol>
+
+
+<p>That&rsquo;s the reason why Nicholas and I stay away from Facebook API previously, and the experience in CS3216 Assignment 1 confirm our insight again.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Playing with HOOK]]></title>
+    <link href="http://wgx731.github.io/blog/2013/08/18/playing-with-hook/"/>
+    <updated>2013-08-18T18:34:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/08/18/playing-with-hook</id>
+    <content type="html"><![CDATA[<h2>What is git hook?</h2>
+
+<p>According to git documentation:</p>
+
+<blockquote><p>A feature that fire off custom scripts when certain important actions occur, including client side and server side.</p></blockquote>
+
+<p>Learning from <a href="https://github.com/olenhad">master omer</a> on Saturday&rsquo;s workshop, we can use hook to do automated deployment, his approach is to create a separate <strong>bare</strong> repository in the hosting server and when push received trigger the script to do deployment. Whereas in my opinion, if you host your repository on <a href="https://github.com/">github</a> or <a href="https://bitbucket.org/">Bitbucket</a>, you can also use the POST hook service from them to do automatic deployment.</p>
+
+<!--more-->
+
+
+<p>If you are using Bitbucket, and here is the <a href="https://confluence.atlassian.com/display/BITBUCKET/POST+hook+management">documentation on Bitbucket POST hook</a>, it&rsquo;s quite useful. But I think it lacks of some example. We are using PHP to receive the POST data, it took us quite some time to figure out that the POST json data is actually in <code>$_POST['payload']</code>, which is not pointed out in the documentation.</p>
+
+<p>Below is an skeleton file that you can use for your auto-deployment as well:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>[deploy.php] </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">payload</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;]))</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">],</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// only deploy for master branch</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$payload</span><span class="p">[</span><span class="s2">&quot;commits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;branch&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;master&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// only deploy when you see deploy command - store in $deployCommand</span>
+</span><span class='line'>        <span class="nv">$deploy</span> <span class="o">=</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$payload</span><span class="p">[</span><span class="s2">&quot;commits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">],</span> <span class="nv">$deployCommand</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$deploy</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// finish what you need to do for deployment</span>
+</span><span class='line'>            <span class="k">echo</span> <span class="s2">&quot;Deployed. :D </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$e</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getMessage</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;Latest commit not from master branch, not deploying. </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">echo</span><span class="s2">&quot;Missing payload.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Sadly at last we need to switch back to Github with <em>no administrator access</em> for the repository, besides that we need to focus on the assignment itself, so I don&rsquo;t think we will continue on this auto-deployment tool as it&rsquo;s just a tool, anyway it&rsquo;s a good practice for us at least.</p>
+
+<h5>Wish it helps you as well. Thank you very much.</h5>
+]]></content>
+  </entry>
+  
+</feed>

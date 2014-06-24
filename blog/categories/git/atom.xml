@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | wgx731's Technical Blog]]></title>
+  <link href="http://wgx731.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://wgx731.github.io/"/>
+  <updated>2014-06-24T21:54:07+08:00</updated>
+  <id>http://wgx731.github.io/</id>
+  <author>
+    <name><![CDATA[wgx731]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Playing with HOOK]]></title>
+    <link href="http://wgx731.github.io/blog/2013/08/18/playing-with-hook/"/>
+    <updated>2013-08-18T18:34:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/08/18/playing-with-hook</id>
+    <content type="html"><![CDATA[<h2>What is git hook?</h2>
+
+<p>According to git documentation:</p>
+
+<blockquote><p>A feature that fire off custom scripts when certain important actions occur, including client side and server side.</p></blockquote>
+
+<p>Learning from <a href="https://github.com/olenhad">master omer</a> on Saturday&rsquo;s workshop, we can use hook to do automated deployment, his approach is to create a separate <strong>bare</strong> repository in the hosting server and when push received trigger the script to do deployment. Whereas in my opinion, if you host your repository on <a href="https://github.com/">github</a> or <a href="https://bitbucket.org/">Bitbucket</a>, you can also use the POST hook service from them to do automatic deployment.</p>
+
+<!--more-->
+
+
+<p>If you are using Bitbucket, and here is the <a href="https://confluence.atlassian.com/display/BITBUCKET/POST+hook+management">documentation on Bitbucket POST hook</a>, it&rsquo;s quite useful. But I think it lacks of some example. We are using PHP to receive the POST data, it took us quite some time to figure out that the POST json data is actually in <code>$_POST['payload']</code>, which is not pointed out in the documentation.</p>
+
+<p>Below is an skeleton file that you can use for your auto-deployment as well:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>[deploy.php] </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">payload</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;]))</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">],</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// only deploy for master branch</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$payload</span><span class="p">[</span><span class="s2">&quot;commits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;branch&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;master&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// only deploy when you see deploy command - store in $deployCommand</span>
+</span><span class='line'>        <span class="nv">$deploy</span> <span class="o">=</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$payload</span><span class="p">[</span><span class="s2">&quot;commits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">],</span> <span class="nv">$deployCommand</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$deploy</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// finish what you need to do for deployment</span>
+</span><span class='line'>            <span class="k">echo</span> <span class="s2">&quot;Deployed. :D </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$e</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getMessage</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;Latest commit not from master branch, not deploying. </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">echo</span><span class="s2">&quot;Missing payload.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Sadly at last we need to switch back to Github with <em>no administrator access</em> for the repository, besides that we need to focus on the assignment itself, so I don&rsquo;t think we will continue on this auto-deployment tool as it&rsquo;s just a tool, anyway it&rsquo;s a good practice for us at least.</p>
+
+<h5>Wish it helps you as well. Thank you very much.</h5>
+]]></content>
+  </entry>
+  
+</feed>

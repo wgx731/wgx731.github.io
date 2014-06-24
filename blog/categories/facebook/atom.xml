@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Facebook | wgx731's Technical Blog]]></title>
+  <link href="http://wgx731.github.io/blog/categories/facebook/atom.xml" rel="self"/>
+  <link href="http://wgx731.github.io/"/>
+  <updated>2014-06-24T21:54:07+08:00</updated>
+  <id>http://wgx731.github.io/</id>
+  <author>
+    <name><![CDATA[wgx731]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The "evil" side of Facebook]]></title>
+    <link href="http://wgx731.github.io/blog/2013/09/01/the-evil-side-of-facebook/"/>
+    <updated>2013-09-01T20:02:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2013/09/01/the-evil-side-of-facebook</id>
+    <content type="html"><![CDATA[<p>Assignment 1 of CS3216 is almost finished, we just submitted our Application Action for Facebook to review, and left with Collection only (which requires Action to be reviewed).</p>
+
+<!--more-->
+
+
+<p>During the last week, we have seen the &lsquo;evil&rsquo; side of Facebook :P, I will just put my findings below in case someone got into same &lsquo;trap&rsquo;:</p>
+
+<ul>
+<li><p>The Request
+<blockquote><p>Requests are only available for games on Facebook.com or iOS and Android apps</p><footer><strong>Facebook Developer <a href="https://developers.Facebook.com/docs/reference/dialogs/requests/">https://developers.Facebook.com/docs/reference/dialogs/requests/</a> Facebook Request Documentation</strong></footer></blockquote>
+<blockquote><p>The primary purpose of your Canvas or Page Tab app on Facebook must not be to simply redirect users out of the Facebook experience and onto an external site.</p><footer><strong>Facebook Developer <a href="https://developers.Facebook.com/policy/">https://developers.Facebook.com/policy/</a> Facebook Policy</strong></footer></blockquote>
+These two lines has made it impossible to use request dialog to invite friends to a standalone Facebook application, initially we are trying to set up a redirect on Canvas page until we notice the Facebook Policy :( Luckily the assignment requirement has changed accordingly.</p></li>
+<li><p>The Like Button
+<blockquote><p>Facebook did ninja changes. The add comment pop-up is only suppose to appear for normal layout. Invite Friends should not use window pop-up.</p><footer><strong>Master Nicholas Kwan <a href="http://caballa.onfry.com/blog/">http://caballa.onfry.com/blog/</a></strong></footer></blockquote>
+Because of the changes, we need to do a lot of new fix on our website. :(</p></li>
+<li><p>The Scrape</p></li>
+</ul>
+
+
+<p>Just some points you need to be careful with:</p>
+
+<ol>
+<li>Facebook scrape will ignore changes in meta data from javascript, make sure you have different meta data for different URL without javascript.</li>
+<li>Facebook like button <code>data-href</code> link should be the scraped link for your object.</li>
+<li>Facebook only scrape every 24 hours, if you need to update, admin of the Facebook application need to force Facebook to update in <a href="https://developers.Facebook.com/tools/debug">Open Graph Debug Tool</a>.</li>
+<li>All the object created by Facebook scrape can&rsquo;t be deleted, as so far we haven&rsquo;t found a way to delete the &lsquo;testing&rsquo; objects.</li>
+<li>Facebook ignore URL with hash inside, there one may not be true, but due to our test it seems so.</li>
+</ol>
+
+
+<p>That&rsquo;s the reason why Nicholas and I stay away from Facebook API previously, and the experience in CS3216 Assignment 1 confirm our insight again.</p>
+]]></content>
+  </entry>
+  
+</feed>
