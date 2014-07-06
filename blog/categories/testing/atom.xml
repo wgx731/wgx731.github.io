@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-06T17:14:49+08:00</updated>
+  <updated>2014-07-06T17:30:09+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -61,32 +61,22 @@
 
 <p>As I have been living without <em>Windows</em> for quite a few years, so forgive me if it just doesn&rsquo;t work on the <em>Windows</em> machine. For <em>Linux</em> and <em>Mac</em> user, below is what you should do to install python virtualenv:</p>
 
-<ol>
+<ul>
 <li>Read the <a href="https://virtualenv.pypa.io/en/latest/virtualenv.html#installation">documentation on installation</a>, unless you want to mess up your global packages, please don&rsquo;t install virtualenv globally. Just download the latest source from <a href="https://pypi.python.org/packages/source/v/virtualenv/">PyPi</a>, extract to a folder where you usually put your development tools <code>~/Development/</code> for me.</li>
-<li>Create an alias for your virtualenv.</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<li>Create an alias for your virtualenv.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Put in your ~/.bashrc file&lt;/h1&gt;
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;h1&gt;Put in your ~/.bashrc file&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;alias <span class="nv">virtualenv</span><span class="o">=</span>&amp;lsquo;path/to/virtualenv/virtualenv.py&amp;rsquo;
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ol>
-<li>Create a new virtual python environment to test it and done.</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+<li>Create a new virtual python environment to test it and done.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>virtualenv MYENV
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+</ul>
+
 
 <p>For <em>Windows</em> users, I have found <a href="http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/">this</a>, <a href="http://docs.python-guide.org/en/latest/starting/install/win/">this</a> and <a href="http://www.slideshare.net/sivasubramaniam3/installing-python-setup-tools-virtual-env-in-windows">this</a> for you as well. :)</p>
 
@@ -94,60 +84,37 @@
 
 <p>This is the last step before the tutorial, here is what you need to do:</p>
 
-<ol>
-<li>Clone the tutorial repository</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<ul>
+<li>Clone the tutorial repository
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/wgx731/2014-nus-orbital-mission-control-8.git&quot;</span>&gt;https://github.com/wgx731/2014-nus-orbital-mission-control-8.git&lt;/a&gt;&lt;/p&gt;
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/wgx731/2014-nus-orbital-mission-control-8.git&quot;</span>&gt;https://github.com/wgx731/2014-nus-orbital-mission-control-8.git&lt;/a&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;OR&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;git clone git@github.com:wgx731/2014-nus-orbital-mission-control-8.git
 </span><span class='line'><span class="nb">cd </span>2014-nus-orbital-mission-control-8
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ol>
-<li>Check out to <strong>step-x</strong> tag</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+<li>Check out to <strong>step-x</strong> tag
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>git checkout -f step-x
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ol>
-<li>Create and use a new virtualenv called <strong>env</strong>, actually you can give it any name, it&rsquo;s just I have <a href="https://help.github.com/articles/ignoring-files">git ignored</a> the <code>env</code> folder in this repository</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Create and use a new virtualenv called <strong>env</strong>, actually you can give it any name, it&rsquo;s just I have <a href="https://help.github.com/articles/ignoring-files">git ignored</a> the <code>env</code> folder in this repository
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>virtualenv env
 </span><span class='line'><span class="nb">source </span>env/bin/activate
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ol>
-<li>Install the requirements.</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Install the requirements.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>pip install -r requirements.txt
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<ol>
-<li>Test it out</li>
-</ol>
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Test it out
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -173,33 +140,35 @@
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> &amp;ldquo;test-examples/&amp;rdquo;&lt;/p&gt;
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> &amp;ldquo;test-examples/&amp;rdquo;
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;check pep8&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p&gt;flake8 ./ -v&lt;/p&gt;
+</span><span class='line'>flake8 ./ -v
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;single doc <span class="nb">test</span>&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p&gt;python doctest_example.py -v&lt;/p&gt;
+</span><span class='line'>python doctest_example.py -v
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;single unit <span class="nb">test</span>&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p&gt;python test_unitest_example.py -v&lt;/p&gt;
+</span><span class='line'>python test_unitest_example.py -v
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;nose <span class="nb">test </span>framework&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p&gt;nosetests &amp;mdash;with-doctest -v&lt;/p&gt;
+</span><span class='line'>nosetests &amp;mdash;with-doctest -v
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;pytest <span class="nb">test </span>framework&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p&gt;py.test &amp;mdash;doctest-module -v
-</span><span class='line'><span class="nb">cd </span>behave-example/&lt;/p&gt;
+</span><span class='line'>py.test &amp;mdash;doctest-module -v
+</span><span class='line'><span class="nb">cd </span>behave-example/
 </span><span class='line'>
 </span><span class='line'>&lt;h1&gt;behave python BDD framework&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;behave -v
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</ul>
+
 
 <p>You should see all the tests passed. And congratulations, you have successfully setup your environment. :P</p>
 

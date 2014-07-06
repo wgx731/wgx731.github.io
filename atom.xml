@@ -4,7 +4,7 @@
   <title><![CDATA[wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-06T17:14:49+08:00</updated>
+  <updated>2014-07-06T17:30:09+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -59,10 +59,10 @@ Remember to add your GAE python SDK location in your PATH environment.
 
 <p>As I have been living without <em>Windows</em> for quite a few years, so forgive me if it just doesn&rsquo;t work on the <em>Windows</em> machine. For <em>Linux</em> and <em>Mac</em> user, below is what you should do to install python virtualenv:</p>
 
-<ol>
+<ul>
 <li>Read the <a href="https://virtualenv.pypa.io/en/latest/virtualenv.html#installation">documentation on installation</a>, unless you want to mess up your global packages, please don&rsquo;t install virtualenv globally. Just download the latest source from <a href="https://pypi.python.org/packages/source/v/virtualenv/">PyPi</a>, extract to a folder where you usually put your development tools <code>~/Development/</code> for me.</li>
 <li>Create an alias for your virtualenv.</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -72,9 +72,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>Create a new virtual python environment to test it and done.</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -88,9 +88,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 
 <p>This is the last step before the tutorial, here is what you need to do:</p>
 
-<ol>
+<ul>
 <li>Clone the tutorial repository</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -104,9 +104,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>Check out to <strong>step-x</strong> tag</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -114,9 +114,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>Create and use a new virtualenv called <strong>env</strong>, actually you can give it any name, it&rsquo;s just I have <a href="https://help.github.com/articles/ignoring-files">git ignored</a> the <code>env</code> folder in this repository</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -126,9 +126,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>Install the requirements.</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -136,9 +136,9 @@ Remember to add your GAE python SDK location in your PATH environment.
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>Test it out</li>
-</ol>
+</ul>
 
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
