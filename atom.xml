@@ -4,7 +4,7 @@
   <title><![CDATA[wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-06-24T21:54:51+08:00</updated>
+  <updated>2014-07-06T17:14:49+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[NUS Orbital 2014] Mission Control #8 Environment Setup Guide]]></title>
+    <link href="http://wgx731.github.io/blog/2014/07/06/orbital-m8-environment-setup/"/>
+    <updated>2014-07-06T15:27:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2014/07/06/orbital-m8-environment-setup</id>
+    <content type="html"><![CDATA[<p>This post is the guide for you to setup your machine for the NUS orbital 2014 mission control #8 tutorial, it&rsquo;s better that you have finished your environment setup before coming to the mission control, because downloading the components may need quite some time and the network may not be very good during mission control session. Wish by after reading the post, you can setup your environment and be prepared for the tutorial. :D</p>
+
+<!--more-->
+
+
+<h2>Components Check List</h2>
+
+<ul>
+<li><a href="http://git-scm.com/">Git</a></li>
+<li><a href="https://developers.google.com/appengine/downloads">GAE Python SDK</a></li>
+<li><a href="https://virtualenv.pypa.io/en/latest/">python virtualenv</a></li>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/blob/master/requirements.txt">3rd party libraries used in tutorial</a></li>
+</ul>
+
+
+<h2>Step by Step Guide Help</h2>
+
+<h6>NOTE: to <em>windows</em> users, I will try to help you during the mission control if you have any trouble during the setup.</h6>
+
+<h4>Git</h4>
+
+<p>Actually this should not be listed in this help guide, because if you still don&rsquo;t know about <code>git</code> by now, I am very worried about what you will be delivering as your final application. :(</p>
+
+<h4>GAE Python SDK</h4>
+
+<p><span class='pullquote-right' data-pullquote='Remember to add your GAE python SDK location in your PATH environment.'>
+This should be quite easy for you guys, as most of you are using <strong>GAE python SDK</strong> everyday during orbital. I will just leave a small tip here for <em>Linux</em> users.
+Remember to add your GAE python SDK location in your PATH environment.
+</span></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Put in your ~/.bashrc file</span>
+</span><span class='line'><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/Development/google_appengine&quot;</span>:<span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>python virtualenv</h4>
+
+<p>As I have been living without <em>Windows</em> for quite a few years, so forgive me if it just doesn&rsquo;t work on the <em>Windows</em> machine. For <em>Linux</em> and <em>Mac</em> user, below is what you should do to install python virtualenv:</p>
+
+<ol>
+<li>Read the <a href="https://virtualenv.pypa.io/en/latest/virtualenv.html#installation">documentation on installation</a>, unless you want to mess up your global packages, please don&rsquo;t install virtualenv globally. Just download the latest source from <a href="https://pypi.python.org/packages/source/v/virtualenv/">PyPi</a>, extract to a folder where you usually put your development tools <code>~/Development/</code> for me.</li>
+<li>Create an alias for your virtualenv.</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Put in your ~/.bashrc file</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">virtualenv</span><span class="o">=</span><span class="s1">&#39;path/to/virtualenv/virtualenv.py&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Create a new virtual python environment to test it and done.</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>virtualenv MYENV
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For <em>Windows</em> users, I have found <a href="http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/">this</a>, <a href="http://docs.python-guide.org/en/latest/starting/install/win/">this</a> and <a href="http://www.slideshare.net/sivasubramaniam3/installing-python-setup-tools-virtual-env-in-windows">this</a> for you as well. :)</p>
+
+<h4>3rd party libraries</h4>
+
+<p>This is the last step before the tutorial, here is what you need to do:</p>
+
+<ol>
+<li>Clone the tutorial repository</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/wgx731/2014-nus-orbital-mission-control-8.git
+</span><span class='line'><span class="c"># OR</span>
+</span><span class='line'>git clone git@github.com:wgx731/2014-nus-orbital-mission-control-8.git
+</span><span class='line'><span class="nb">cd </span>2014-nus-orbital-mission-control-8
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Check out to <strong>step-x</strong> tag</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git checkout -f step-x
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Create and use a new virtualenv called <strong>env</strong>, actually you can give it any name, it&rsquo;s just I have <a href="https://help.github.com/articles/ignoring-files">git ignored</a> the <code>env</code> folder in this repository</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>virtualenv env
+</span><span class='line'><span class="nb">source </span>env/bin/activate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Install the requirements.</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pip install -r requirements.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Test it out</li>
+</ol>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> <span class="s2">&quot;test-examples/&quot;</span>
+</span><span class='line'><span class="c"># check pep8</span>
+</span><span class='line'>flake8 ./ -v
+</span><span class='line'><span class="c"># single doc test</span>
+</span><span class='line'>python doctest_example.py -v
+</span><span class='line'><span class="c"># single unit test</span>
+</span><span class='line'>python test_unitest_example.py -v
+</span><span class='line'><span class="c"># nose test framework</span>
+</span><span class='line'>nosetests --with-doctest -v
+</span><span class='line'><span class="c"># pytest test framework</span>
+</span><span class='line'>py.test --doctest-module -v
+</span><span class='line'><span class="nb">cd </span>behave-example/
+</span><span class='line'><span class="c"># behave python BDD framework</span>
+</span><span class='line'>behave -v
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see all the tests passed. And congratulations, you have successfully setup your environment. :P</p>
+
+<h5>Please comment or send email to me if you have any trouble or if you feel there is any error in the setup guide. Enjoy and start exploring if you want to.</h5>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Jackson &amp; export problem]]></title>
