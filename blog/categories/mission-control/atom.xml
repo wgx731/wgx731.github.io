@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mission-control | wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/blog/categories/mission-control/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-06T17:30:09+08:00</updated>
+  <updated>2014-07-08T13:40:00+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -12,6 +12,394 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[NUS Orbital 2014] Mission Control #8 Tutorial Guide]]></title>
+    <link href="http://wgx731.github.io/blog/2014/07/08/nus-orbital-2014-mission-control-number-8-tutorial-guide/"/>
+    <updated>2014-07-08T09:14:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2014/07/08/nus-orbital-2014-mission-control-number-8-tutorial-guide</id>
+    <content type="html"><![CDATA[<p>This post is the guide for you to follow and complete the NUS orbital 2014 mission control #8 tutorial. Wish by after reading the post, you will know testing better and setup your own CI to see all your tests are passing. :P</p>
+
+<!--more-->
+
+
+<h2>Agenda</h2>
+
+<ul>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/releases/tag/step-0">Step 0 &ndash; What are we testing</a></li>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/releases/tag/step-1">Step 1 &ndash; Doctest your model</a></li>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/releases/tag/step-2">Step 2 &ndash; Unittest your helper method</a></li>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/releases/tag/step-3">Step 3 &ndash; Test your handler</a></li>
+<li><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/releases/tag/step-4">Step 4 &ndash; Use behave to do browser test</a></li>
+<li>Final words &ndash; CI</li>
+</ul>
+
+
+<h2>Step by Step Tutorial</h2>
+
+<h5>NOTE: from <code>step-y</code> to <code>step-y-done</code> is one topic of testing, there will be practice and homework for each section. Remember to setup your <code>virtualenv</code> before continue. Below are some tips during the tutorial:</h5>
+
+<ul>
+<li>Use below command to go to correct step before reading the related section.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git checkout -f step-y
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Use below command to run test with <code>nose</code>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>nosetests &amp;mdash;with-doctest &amp;mdash;with-gae &amp;mdash;without-sandbox &amp;mdash;gae-lib-root<span class="o">=</span>&amp;lsquo;/path/to/google_appengine/&amp;rsquo; -v
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Use below command to run test with <code>pytest</code>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>py.test &amp;mdash;doctest-modules &amp;mdash;with-gae &amp;mdash;gae-path<span class="o">=</span>&amp;lsquo;/path/to/google_appengine&amp;rsquo; -v
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Use below command to run test with <code>behave</code>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>behave -v
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<li>Passing the test doesn&rsquo;t mean that you application doesn&rsquo;t have bugs, and it&rsquo;s not the case that the more test you have the better.</li>
+</ul>
+
+
+<h4>Step 0 (checkout to step-0)</h4>
+
+<p>First of all, I have assumed that you have <a href="http://wgx731.github.io/blog/2014/07/06/orbital-m8-environment-setup/">setup your environment</a> correctly, and you are able to test it out at <code>step-x</code>. This is the easiest step, I have downloaded <a href="https://github.com/GoogleCloudPlatform/appengine-guestbook-python">the sample guestbook application</a>, please go to <code>guestbook</code> folder and try to start the application with your <code>google_appengine</code> and make sure it is running correctly. If you can sign on your guestbook at <a href="http://localhost:8080">http://localhost:8080/</a>, then you are ready to go to the next step.</p>
+
+<p>No practice and homework for this step.</p>
+
+<p><strong><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/compare/step-x...step-0">Code Diff</a></strong></p>
+
+<h4>Step 1 (checkout to <code>step-1</code>)</h4>
+
+<p>The first thing we are going to test is your <code>model</code> for your google app engine project. In <code>guestbook</code>, there is only one <code>model</code> called <code>Greeting</code>. And we will be using python <code>doctest</code> to help us on this task. As a demo, I have already write the testing for creating <code>Greeting</code>. Here is an explanation for the core part of the testing code:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">You</span> <span class="n">can</span> <span class="n">create</span> <span class="n">a</span> <span class="n">Greeting</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">greeting</span> <span class="o">=</span> <span class="n">Greeting</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">guestbook_key</span><span class="p">(),</span> <span class="n">content</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">test</span> <span class="n">content</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">greeting</span>
+</span><span class='line'><span class="n">Greeting</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">Key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">Guestbook</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">default_guestbook</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">Greeting</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="bp">None</span><span class="p">),</span> <span class="n">content</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">test</span> <span class="n">content</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="n">created_key</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="n">put</span><span class="p">()</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">blockquote</span><span class="o">&gt;&lt;/</span><span class="n">blockquote</span><span class="o">&gt;&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">You</span> <span class="n">can</span> <span class="n">query</span> <span class="n">to</span> <span class="n">select</span> <span class="n">the</span> <span class="n">greeting</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">blockquote</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">greetings_query</span> <span class="o">=</span> <span class="n">Greeting</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">ancestor</span><span class="o">=</span><span class="n">guestbook_key</span><span class="p">())</span>
+</span><span class='line'><span class="nb">list</span><span class="p">(</span><span class="n">greetings_query</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c"># doctest: +ELLIPSIS</span>
+</span><span class='line'><span class="p">[</span><span class="n">Greeting</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">Key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">Guestbook</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">default_guestbook</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;)]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+In this doctest, we have created a new <code>Greeting</code> object and put it into the datastore, and then verify the saving by query <code>Greeting</code> by key.</p></blockquote></blockquote></blockquote>
+
+<p>Now it&rsquo;s your turn to write some test. In the <em>TODO</em> part, I have asked you to write <code>doctest</code> for modification of <code>Greeting</code> object. Please try it out yourself before go to the answers.</p>
+
+<p>Once you have finished writing your <code>doctest</code>, please run the test with either <code>nose</code> or <code>pytest</code> to verify the your answer.</p>
+
+<h6>Homework: Apply doctest to your model in your project where you feel needed.</h6>
+
+<p><strong><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/compare/step-1...step-1-done">Code Diff</a></strong></p>
+
+<h4>Step 2 (checkout to <code>step-2</code>)</h4>
+
+<p>Sometimes, you may have some helper methods in your code, so let&rsquo;s use <code>unittest</code> this time to help us test helper methods. At <code>step-2</code>, I have refactored the code and add a <code>get_user_url</code> helper method. Please study the method and see the test example I have done for you. Here is an explanation for the core part:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c"># First, create an instance of the Testbed class.</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">Testbed</span><span class="p">()</span>
+</span><span class='line'><span class="c"># Then activate the testbed, which prepares the service stubs for use.</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+</span><span class='line'><span class="c"># Next, declare which service stubs you want to use.</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">init_user_stub</span><span class="p">()</span>
+</span><span class='line'><span class="c"># Set up expected values</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">user_login_url</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;https://www.google.com/accounts/Login?continue=http%3A//testbed.example.com/&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;url_linktext&#39;</span><span class="p">:</span> <span class="s">&#39;Login&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">deactivate</span><span class="p">()</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">setCurrentUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">is_admin</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">email_to_set</span> <span class="o">=</span> <span class="n">email</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">id_to_set</span> <span class="o">=</span> <span class="n">user_id</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">admin_to_set</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span> <span class="k">if</span> <span class="n">is_admin</span> <span class="k">else</span> <span class="s">&#39;0&#39;</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">setup_env</span><span class="p">(</span><span class="n">USER_EMAIL</span><span class="o">=</span><span class="n">email_to_set</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">setup_env</span><span class="p">(</span><span class="n">USER_ID</span><span class="o">=</span><span class="n">id_to_set</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">testbed</span><span class="o">.</span><span class="n">setup_env</span><span class="p">(</span><span class="n">USER_IS_ADMIN</span><span class="o">=</span><span class="n">admin_to_set</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">testNoLoginUser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">setCurrentUser</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">get_user_url</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">equal_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_login_url</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;url_linktext&#39;</span><span class="p">],</span> <span class="n">is_not</span><span class="p">(</span><span class="s">&#39;Logout&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The <code>setUp</code> method is run before the test to setup the <code>Testbed</code> stub and <code>tearDown</code> method is used to clean up after testing, <code>setCurrentUser</code> is a test helper method and at last <code>testNoLoginUser</code> is the actual test method. By the way, sorry for the java naming convention in python code. I was doing a java project at the same time. :(</p>
+
+<p>Now it&rsquo;s your turn to write some test. In the <em>TODO</em> part, I have asked you to write <code>unittest</code> for testing with a login user. Please try it out yourself before go to the answers.</p>
+
+<p>Once you have finished writing your <code>unittest</code>, please run the test with either <code>nose</code> or <code>pytest</code> to verify the your answer.</p>
+
+<h6>Homework: Apply unittest to your helper method in your project where you feel needed.</h6>
+
+<p><strong><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/compare/step-2...step-2-done">Code Diff</a></strong></p>
+
+<h4>Step 3 (checkout to <code>step-3</code>)</h4>
+
+<p>Now you have finished your unit testing part, you are confident that you code is doing what it is designed to do. But wait, when things integrate together, it may cause other issues. That&rsquo;s why integration testing is needed. In the demo, I have write some code for the integration testing of <code>MainPage</code> handler. Here is the explanation of the core part:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">check_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_body</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">assert_that</span><span class="p">(</span><span class="n">response_body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">submit_button</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response_body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switch_button</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response_body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guest_name_label</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response_body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">css_link</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">test_main_page_no_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">set_current_user</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</span><span class='line'><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">testapp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_int</span><span class="p">,</span> <span class="n">equal_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_ok</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span> <span class="n">equal_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_content_type</span><span class="p">))</span>
+</span><span class='line'><span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">normal_body</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">check_html</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_string</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">test_main_page_with_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">set_current_user</span><span class="p">(</span><span class="s">&#39;test@test.com&#39;</span><span class="p">,</span> <span class="s">&#39;test&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">testapp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_int</span><span class="p">,</span> <span class="n">equal_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_ok</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span> <span class="n">equal_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_content_type</span><span class="p">))</span>
+</span><span class='line'><span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">normal_body</span>
+</span><span class='line'><span class="bp">self</span><span class="o">.</span><span class="n">check_html</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logout_string</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The test are quite straight forward, it just route to the correct path for the handler and verify if the html source returned is correct.</p>
+
+<p>Now it&rsquo;s your turn to write some test. In the <em>TODO</em> part, I have asked you to test <code>Guestbook</code> handler. Please try it out yourself before go to the answers.</p>
+
+<p>Once you have finished writing your integration testing for handler, please run the test with either <code>nose</code> or <code>pytest</code> to verify the your answer.</p>
+
+<h6>Homework: Add integration test for handlers in your project.</h6>
+
+<p><strong><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/compare/step-3...step-3-done">Code Diff</a></strong></p>
+
+<h4>Step-4 (checkout to <code>step-4</code>)</h4>
+
+<p>You are almost there. Remember about acceptance testing. Now let&rsquo;s use <code>behave</code> and <code>selenium</code> to help us achieve the goal. Make sure you have a <code>Firefox</code> installed on your machine for the browser testing. You may wonder why we need browser testing as we have finished integration testing. As before, when you product is delivered to users, they will not use it as what you are testing with integration handler test. Browser testing add one more guarantee layer before you product meet the users. In the demo, I have help you to setup the <code>features</code> folder and <code>environment.py</code>, there is also a simple <code>Scenario</code> to test user sign on guestbook without login. Here is the explanation of the core part:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nd">@given</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">user</span> <span class="n">has</span> <span class="n">been</span> <span class="n">sign</span> <span class="n">out</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">step_user_has_sign_out</span><span class="p">(</span><span class="n">context</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">HOME</span><span class="p">)</span>
+</span><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">sign_out_link</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s">&#39;Logout&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">sign_out_link</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</span><span class='line'><span class="k">except</span> <span class="n">NoSuchElementException</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nd">@when</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">I</span> <span class="n">go</span> <span class="n">to</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;{</span><span class="n">url</span><span class="p">}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">step_go_to</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nd">@then</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">I</span> <span class="n">should</span> <span class="n">see</span> <span class="n">main</span> <span class="n">page</span> <span class="n">html</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">step_see_main_page</span><span class="p">(</span><span class="n">context</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">guest_name_label</span> <span class="o">=</span> <span class="s">&#39;Guestbook name:&#39;</span>
+</span><span class='line'><span class="n">page_source</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">page_source</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">page_source</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="n">guest_name_label</span><span class="p">))</span>
+</span><span class='line'><span class="n">elm</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;submit&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">elm</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;Sign Guestbook&quot;</span>
+</span><span class='line'><span class="n">elm</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;switch&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">elm</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;switch&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nd">@when</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">I</span> <span class="n">sign</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;{</span><span class="n">content</span><span class="p">}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">setp_sign_content</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">elm</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_name</span><span class="p">(</span><span class="s">&quot;content&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">elm</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'><span class="n">button</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;submit&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nd">@then</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">I</span> <span class="n">should</span> <span class="n">see</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;{</span><span class="n">content</span><span class="p">}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="n">signed</span> <span class="n">by</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;{</span><span class="n">user</span><span class="p">}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">setp_see_content</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">page_source</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">page_source</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">page_source</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="s">&quot;&amp;lt;blockquote&amp;gt;</span><span class="si">%s</span><span class="s">&amp;lt;/blockquote&amp;gt;&quot;</span> <span class="o">%</span> <span class="n">content</span><span class="p">))</span>
+</span><span class='line'><span class="n">assert_that</span><span class="p">(</span><span class="n">page_source</span><span class="p">,</span> <span class="n">contains_string</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>With the magic from <code>behave</code>, by using <code>@given</code>, <code>@when</code>, <code>@then</code> decorators, we are able to translate our <code>feature</code> document into real test code. Take a note with how <code>{}</code> is used for gather information from the <code>feature</code> document.</p>
+
+<p>Now it&rsquo;s your turn to write some test. In the <em>TODO</em> part, I have asked you to test user sign on guestbook with login. Please try it out yourself before go to the answers.</p>
+
+<p>Once you have finished writing your integration testing for handler, please run the test with <code>behave</code> to verify the your answer.</p>
+
+<h6>Homework: Try to add browser testing in your project if you are interested, as it is a bit hard to setup the environment compared to previous unit testing and integration testing.</h6>
+
+<p><strong><a href="https://github.com/wgx731/2014-nus-orbital-mission-control-8/compare/step-4...step-4-done">Code Diff</a></strong></p>
+
+<h4>Final words &ndash; CI</h4>
+
+<p>Now you have tested your project. Do you want to know how well your test is? Do you want to have a CI server to show off? :D</p>
+
+<p>You can check out <a href="https://travis-ci.org/wgx731/2014-nus-orbital-mission-control-8">Travis CI</a> or <a href="https://drone.io/wgx731/2014-nus-orbital-mission-control-8-google-code">Drone CI</a> for this project.</p>
+
+<p>To setup CI server for you project, you can refer to the documentation from <a href="http://docs.travis-ci.com/">Travis</a> and <a href="http://docs.drone.io/">Drone</a> for more details.</p>
+
+<p>And you can also setup <a href="https://coveralls.io/">coveralls report</a> if you want. :)</p>
+
+<p>That&rsquo;s all I have to share with you about python testing, wish you all are enjoying it.</p>
+
+<h5>Please comment or send email to me if you have any trouble or if you feel there is any error in the tutorial guide.</h5>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[NUS Orbital 2014] Mission Control #8 Environment Setup Guide]]></title>
