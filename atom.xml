@@ -4,7 +4,7 @@
   <title><![CDATA[wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-08T13:40:00+08:00</updated>
+  <updated>2014-07-15T21:02:54+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -406,7 +406,7 @@
 
 <p>Actually this should not be listed in this help guide, because if you still don&rsquo;t know about <code>git</code> by now, I am very worried about what you will be delivering as your final application. :(</p>
 
-<h4>GAE Python SDK</h4>
+<h4>GAE Python SDK (Version 1.9.6)</h4>
 
 <p><span class='pullquote-right' data-pullquote='Remember to add your GAE python SDK location in your PATH environment.'>
 This should be quite easy for you guys, as most of you are using <strong>GAE python SDK</strong> everyday during orbital. I will just leave a small tip here for <em>Linux</em> users.
