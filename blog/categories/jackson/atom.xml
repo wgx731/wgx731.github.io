@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jackson | wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/blog/categories/jackson/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-15T21:02:54+08:00</updated>
+  <updated>2014-07-16T00:58:26+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -18,7 +18,7 @@
     <link href="http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem/"/>
     <updated>2014-06-24T21:10:00+08:00</updated>
     <id>http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem</id>
-    <content type="html"><![CDATA[<p>I am working with <a href="http://www.playframework.com/">Play!</a> these days. So far I like the framework a lot, but I am not sure how is production performance for Play! yet. Anyway, this post is going to discuss about 2 issues I have encountered during my work.</p>
+    <content type="html"><![CDATA[<p>I am working with <a href="http://www.playframework.com">Play!</a> these days. So far I like the framework a lot, but I am not sure how is production performance for Play! yet. Anyway, this post is going to discuss about 2 issues I have encountered during my work.</p>
 
 <!--more-->
 

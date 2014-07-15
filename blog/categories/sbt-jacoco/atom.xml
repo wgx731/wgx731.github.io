@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: java | wgx731's Technical Blog]]></title>
-  <link href="http://wgx731.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <title><![CDATA[Category: sbt-jacoco | wgx731's Technical Blog]]></title>
+  <link href="http://wgx731.github.io/blog/categories/sbt-jacoco/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
   <updated>2014-07-16T00:58:26+08:00</updated>
   <id>http://wgx731.github.io/</id>
@@ -90,48 +90,6 @@
 <p>Surround your pullquote like this {" text to be quoted "}</p>
 
 <h5>At last, I have a small question about the compile process for Play! and sbt, it usually uses up to around 300% CPU (from <code>top</code>) on my Intel i5 4 core computer, and it really takes a long time (around 1 minute) to compile for a small project. Is this sbt issue or Scala issue or Play! issue? Anyone knows the answer please add a comment below. Thank you very much.</h5>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Jackson &amp; export problem]]></title>
-    <link href="http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem/"/>
-    <updated>2014-06-24T21:10:00+08:00</updated>
-    <id>http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem</id>
-    <content type="html"><![CDATA[<p>I am working with <a href="http://www.playframework.com">Play!</a> these days. So far I like the framework a lot, but I am not sure how is production performance for Play! yet. Anyway, this post is going to discuss about 2 issues I have encountered during my work.</p>
-
-<!--more-->
-
-
-<h1>The Jackson issue</h1>
-
-<p>As the title suggested, the first problem is related to <a href="https://github.com/FasterXML/jackson">Jackson</a>, the default Json parsing library Play! is using. In my work, I am required to map some json to Java class, therefore I just create a standard Java class with the <em>Jackson</em> annotations. But it&rsquo;s interesting when I am writing the unit test, because the behavior of the <code>@JsonProperty</code> annotation is not as what I think. There is a <code>required</code> Boolean configuration in annotation, and here is the documentation for it:
-<blockquote><p><code>public abstract boolean required</code></p></p><p><p>Property that indicates whether a value (which may be explicit null) is expected for property during deserialization or not. If expected, BeanDeserialized should indicate this as a validity problem (usually by throwing an exception, but this may be sent via problem handlers that can try to rectify the problem, for example, by supplying a default value).</p></p><p><p><strong>Note that as of 2.0, this property is NOT used by BeanDeserializer: support is expected to be added for a later minor version.</strong></p><footer><strong>Jackson-JavaDoc <a href="http://fasterxml.github.io/jackson-annotations/javadoc/2.2.0/">http://fasterxml.github.io/jackson-annotations/javadoc/2.2.0/</a></strong></footer></blockquote>
-It seems the <code>required</code> field has no effect at all. At least, when I try a json without a required field, Jackson will just assign a default value for the field. And here are some github issues that supporting what I am seeing.</p>
-
-<ul>
-<li><a href="https://github.com/FasterXML/jackson-databind/issues/230">Issue 230</a></li>
-<li><a href="https://github.com/FasterXML/jackson-databind/issues/174">Issue 174</a></li>
-</ul>
-
-
-<p>So if anyone have a solution for this, please kindly send me. :D</p>
-
-<h1>The export issue</h1>
-
-<p>This issue happens when I am playing around with Play! configuration files. <a href="http://www.playframework.com/documentation/2.3.x/ProductionConfiguration">It&rsquo;s said that Play! configuration supports to get value from environment variables</a>, so the usual way for me to setup a so called &lsquo;environment variable&rsquo; is just put it in <code>~/.bashrc</code> file. Here is how I set Play! variable in my <code>~/.bashrc</code>:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">ACTIVATOR</span><span class="o">=</span>&amp;ldquo;<span class="nv">$HOME</span>/Development/activator&amp;rdquo;
-</span><span class='line'><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$ACTIVATOR</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>But this approach doesn&rsquo;t work for Play! configuration, and after a few try-and-error attempts, I have figured out that I am missing the <code>export</code> function. So I was wondering what is the <code>export</code> function doing here. And this <a href="http://stackoverflow.com/questions/7411455/what-does-export-do-in-shell-programming">post</a> may give you more information about it. Basically, if you don&rsquo;t <code>export</code> the environment variable, the process created from your current shell may not have access to it even you current shell can access it.</p>
-
-<p>That&rsquo;s all I have to share so far. Wish it helps for the ones who is facing same problem with me.</p>
-
-<p><strong>It&rsquo;s been a long time since my last post. :P</strong></p>
 ]]></content>
   </entry>
   

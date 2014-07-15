@@ -4,7 +4,7 @@
   <title><![CDATA[wgx731's Technical Blog]]></title>
   <link href="http://wgx731.github.io/atom.xml" rel="self"/>
   <link href="http://wgx731.github.io/"/>
-  <updated>2014-07-15T21:02:54+08:00</updated>
+  <updated>2014-07-16T00:58:26+08:00</updated>
   <id>http://wgx731.github.io/</id>
   <author>
     <name><![CDATA[wgx731]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[More experience from Play!]]></title>
+    <link href="http://wgx731.github.io/blog/2014/07/15/more-experience-from-play/"/>
+    <updated>2014-07-15T21:05:00+08:00</updated>
+    <id>http://wgx731.github.io/blog/2014/07/15/more-experience-from-play</id>
+    <content type="html"><![CDATA[<p>I have been working on <a href="http://www.playframework.com">Play!</a> for more than 1 month, so it&rsquo;s time for me to blog about some new issues I have faced so far.</p>
+
+<!--more-->
+
+
+<h1>The dependency issue</h1>
+
+<p>For any software engineering project, one of the biggest issues for developers is to resolve dependency. <a href="http://www.playframework.com">Play!</a> uses <a href="http://www.scala-sbt.org">sbt</a> to as the build tool. Therefore <code>build.sbt</code> file is where you can specify what other 3rd party libraries you want to use in your project. Sometimes, it&rsquo;s really hard for you to figure out which 3rd party library has added problem to your project. Then you will need help from <a href="https://github.com/jrudolph/sbt-dependency-graph">sbt-dependency-graph</a> plugin. <code>what-depends-on &lt;organization&gt; &lt;module&gt; &lt;revision&gt;</code> command is very useful. :)</p>
+
+<p>Let&rsquo;s take a look at the 2 <code>build.sbt</code> files below, see if you can spot any difference?</p>
+
+<figure class='code'><figcaption><span>build.sbt-1 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>libraryDependencies ++<span class="o">=</span> Seq<span class="o">(</span>
+</span><span class='line'>    javaJdbc,
+</span><span class='line'>    javaJpa,
+</span><span class='line'>    cache,
+</span><span class='line'>    <span class="s2">&quot;org.apache.hadoop&quot;</span> % <span class="s2">&quot;hadoop-common&quot;</span> % <span class="s2">&quot;2.0.0-cdh4.4.0&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;org.mockito&quot;</span> % <span class="s2">&quot;mockito-core&quot;</span> % <span class="s2">&quot;1.9.5&quot;</span> % <span class="s2">&quot;test&quot;</span> exclude<span class="o">(</span><span class="s2">&quot;org.hamcrest&quot;</span>, <span class="s2">&quot;hamcrest-core&quot;</span><span class="o">)</span>,
+</span><span class='line'>    <span class="s2">&quot;com.github.dreamhead&quot;</span> % <span class="s2">&quot;moco-core&quot;</span> % <span class="s2">&quot;0.9.2&quot;</span> % <span class="s2">&quot;test&quot;</span> exclude<span class="o">(</span><span class="s2">&quot;org.slf4j&quot;</span>, <span class="s2">&quot;slf4j-simple&quot;</span><span class="o">)</span>,
+</span><span class='line'>    <span class="s2">&quot;com.github.dreamhead&quot;</span> % <span class="s2">&quot;moco-runner&quot;</span> % <span class="s2">&quot;0.9.2&quot;</span> % <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>build.sbt-2 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>libraryDependencies ++<span class="o">=</span> Seq<span class="o">(</span>
+</span><span class='line'>    javaJdbc,
+</span><span class='line'>    javaJpa,
+</span><span class='line'>    cache,
+</span><span class='line'>    <span class="s2">&quot;org.apache.hadoop&quot;</span> % <span class="s2">&quot;hadoop-common&quot;</span> % <span class="s2">&quot;2.0.0-cdh4.4.0&quot;</span> intransitive<span class="o">()</span>,
+</span><span class='line'>    <span class="s2">&quot;org.mockito&quot;</span> % <span class="s2">&quot;mockito-core&quot;</span> % <span class="s2">&quot;1.9.5&quot;</span> % <span class="s2">&quot;test&quot;</span> exclude<span class="o">(</span><span class="s2">&quot;org.hamcrest&quot;</span>, <span class="s2">&quot;hamcrest-core&quot;</span><span class="o">)</span>,
+</span><span class='line'>    <span class="s2">&quot;com.github.dreamhead&quot;</span> % <span class="s2">&quot;moco-core&quot;</span> % <span class="s2">&quot;0.9.2&quot;</span> % <span class="s2">&quot;test&quot;</span> exclude<span class="o">(</span><span class="s2">&quot;org.slf4j&quot;</span>, <span class="s2">&quot;slf4j-simple&quot;</span><span class="o">)</span>,
+</span><span class='line'>    <span class="s2">&quot;com.github.dreamhead&quot;</span> % <span class="s2">&quot;moco-runner&quot;</span> % <span class="s2">&quot;0.9.2&quot;</span> % <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The interesting part is that, if you use <code>build.sbt-1</code> file, you will get a famous <code>NoSuchMethodError: org.hamcrest.Matcher.describeMismatch</code> <a href="http://stackoverflow.com/questions/7869711/getting-nosuchmethoderror-org-hamcrest-matcher-describemismatch-when-running">Error</a> when your test fails, but <code>build.sbt-2</code> works fine. So what&rsquo;s the magic here? Seems like <code>intransitive()</code> saves me. Please check more details about intransitive <a href="http://www.scala-sbt.org/0.13/docs/Library-Management.html#Disable+Transitivity">here</a>. And by the way, the <code>pom.xml</code> for <code>"org.apache.hadoop" % "hadoop-common" % "2.0.0-cdh4.4.0"</code> must have some wrong settings which caused the <code>hamcrest</code> issue I mentioned above. And if you take a look at source code of <code>JavaHamcrest</code> <a href="https://github.com/hamcrest/JavaHamcrest/blob/master/hamcrest-core/core-matchers.xml">here</a>, it&rsquo;s also interesting how <code>CoreMatchers</code> class is created from a xml file, I think that might be the source issue of <code>NoSuchMethodError</code>. Luckily, this issue has been solved after playing around with the <code>built.sbt</code> file.</p>
+
+<h1><a href="https://github.com/sbt/jacoco4sbt">jacoco4sbt</a> parallel issue</h1>
+
+<p><span class='pullquote-right' data-pullquote='Read the documentation carefully before you use the library.'>
+Actually, it&rsquo;s not really an issue, but rather a wrong setting from my side. As stated on <a href="https://github.com/sbt/jacoco4sbt/wiki">jacoco4sbt wiki page</a>, by default, <code>parallelExecution</code> is set to <code>true</code>, but this will cause problem during Play! test which need to start a <code>TestServer</code>, as you may encounter problems like <code>java.net.BindException: Address already in use</code>. The tip is to add <code>parallelExecution in jacoco.Config := false</code> in your <code>build.sbt</code> file.
+Read the documentation carefully before you use the library.
+</span></p>
+
+<h5>At last, I have a small question about the compile process for Play! and sbt, it usually uses up to around 300% CPU (from <code>top</code>) on my Intel i5 4 core computer, and it really takes a long time (around 1 minute) to compile for a small project. Is this sbt issue or Scala issue or Play! issue? Anyone knows the answer please add a comment below. Thank you very much.</h5>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[NUS Orbital 2014] Mission Control #8 Tutorial Guide]]></title>
@@ -548,7 +623,7 @@ Remember to add your GAE python SDK location in your PATH environment.
     <link href="http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem/"/>
     <updated>2014-06-24T21:10:00+08:00</updated>
     <id>http://wgx731.github.io/blog/2014/06/24/jackson-and-export-problem</id>
-    <content type="html"><![CDATA[<p>I am working with <a href="http://www.playframework.com/">Play!</a> these days. So far I like the framework a lot, but I am not sure how is production performance for Play! yet. Anyway, this post is going to discuss about 2 issues I have encountered during my work.</p>
+    <content type="html"><![CDATA[<p>I am working with <a href="http://www.playframework.com">Play!</a> these days. So far I like the framework a lot, but I am not sure how is production performance for Play! yet. Anyway, this post is going to discuss about 2 issues I have encountered during my work.</p>
 
 <!--more-->
 
